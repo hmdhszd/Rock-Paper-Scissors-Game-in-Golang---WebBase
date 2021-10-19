@@ -15,8 +15,16 @@ const (
 	DRAW         = 3
 )
 
-func PlayRound(playerValue int) (int, string, string) {
+type Round struct {
+	Winner         int    `json:"winner"`
+	ComputerChoise string `json:"computer_choise"`
+	RoundResult    string `json:"round_result"`
+}
+
+func PlayRound(playerValue int) Round {
+
 	rand.Seed(time.Now().UnixNano())
+
 	computerValue := rand.Intn(3)
 	computerChoise := ""
 	roundResult := ""
@@ -44,5 +52,14 @@ func PlayRound(playerValue int) (int, string, string) {
 		winner = COMPUTERWINS
 	}
 
-	return winner, computerChoise, roundResult
+	// return output of the function
+
+	var result Round
+
+	result.Winner = winner
+	result.ComputerChoise = computerChoise
+	result.RoundResult = roundResult
+
+	return result
+
 }
