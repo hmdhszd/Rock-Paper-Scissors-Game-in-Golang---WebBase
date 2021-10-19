@@ -1,0 +1,14 @@
+image: golang:latest
+
+stages:
+  - init
+
+variables:
+  GIT_STRATEGY: none
+
+init-project:
+  stage: init
+  script:
+  - cd /srv/rock-paper-scissors-game-in-golang-webbase
+  - git pull
+  - docker-compose up -d --build --force-recreate
